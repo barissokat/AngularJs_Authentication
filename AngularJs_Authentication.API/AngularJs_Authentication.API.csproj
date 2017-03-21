@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FE340364-AF52-4AB9-8F2C-B3B79E9F4421}</ProjectGuid>
+    <ProjectGuid>{959046B3-01A3-4A49-AA1C-DBE3FA1E23E1}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AngularJs_Authentication</RootNamespace>
-    <AssemblyName>AngularJs_Authentication</AssemblyName>
+    <RootNamespace>AngularJs_Authentication.API</RootNamespace>
+    <AssemblyName>AngularJs_Authentication.API</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -166,9 +166,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51655</DevelopmentServerPort>
+          <DevelopmentServerPort>52244</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51655/</IISUrl>
+          <IISUrl>http://localhost:52244/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
