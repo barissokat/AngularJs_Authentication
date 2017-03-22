@@ -11,15 +11,12 @@ namespace AngularJs_Authentication
 {
     public class Startup
     {
-        public class Startup
+        public void Configuration(IAppBuilder app)
         {
-            public void Configuration(IAppBuilder app)
-            {
-                HttpConfiguration config = new HttpConfiguration();
-                WebApiConfig.Register(config);
-                app.UseWebApi(config);
-            }
-
+            HttpConfiguration config = new HttpConfiguration();
+            WebApiConfig.Register(config);
+            app.UseWebApi(config);
         }
+
     }
 }
