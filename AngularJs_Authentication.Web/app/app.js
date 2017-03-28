@@ -25,6 +25,13 @@ app.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
+
+var serviceBase = 'http://localhost:52244/';
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
+});
+
 app.run(['authService', function (authService) {
     authService.fillAuthData();
 
