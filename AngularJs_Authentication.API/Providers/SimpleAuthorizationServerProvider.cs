@@ -1,5 +1,6 @@
 ﻿using AngularJs_Authentication.API.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
@@ -76,8 +77,11 @@ namespace AngularJs_Authentication.API.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
+            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            if (allowedOrigin == null) allowedOrigin = "*";
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
             using (AuthRepository _repo = new AuthRepository())
             {
@@ -91,11 +95,33 @@ namespace AngularJs_Authentication.API.Providers
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim("sub", context.UserName));
             identity.AddClaim(new Claim("role", "user"));
 
-            context.Validated(identity);
+            var props = new AuthenticationProperties(new Dictionary<string, string>
+                {
+                    {
+                        "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
+                    },
+                    {
+                        "userName", context.UserName
+                    }
+                });
 
+            var ticket = new AuthenticationTicket(identity, props);
+            context.Validated(ticket);
+
+        }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            }
+
+            return Task.FromResult<object>(null);
         }
     }
 }
