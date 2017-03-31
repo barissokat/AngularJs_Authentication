@@ -54,7 +54,7 @@ namespace AngularJs_Authentication.API.Providers
                 }
                 else
                 {
-                    if (client.Secret != Helper.GetHash(clientSecret))
+                    if (client.Secret != clientSecret/*Helper.GetHash(clientSecret)*/)
                     {
                         context.SetError("invalid_clientId", "Client secret is invalid.");
                         return Task.FromResult<object>(null);
